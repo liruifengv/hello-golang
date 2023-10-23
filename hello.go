@@ -58,6 +58,14 @@ func fibonacci() func() int {
 	}
 }
 
+type Vertex struct {
+	X, Y float64
+}
+
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
 func main() {
 	defer fmt.Println("world")
 	// loop
@@ -81,6 +89,7 @@ func main() {
 	fmt.Println(quote.Go())
 
 	// switch
+	fmt.Println("===================Switch===================!")
 	fmt.Print("Go runs on ")
 	switch os := runtime.GOOS; os {
 	case "darwin":
@@ -112,6 +121,7 @@ func main() {
 
 	// fmt.Println("done")
 	// 指针
+	fmt.Println("===================指针===================!")
 	i, j := 42, 2701
 
 	p := &i         // 指向 i
@@ -123,14 +133,12 @@ func main() {
 	p = &j         // 指向 j
 	*p = *p / 37   // 通过指针对 j 进行除法运算
 	fmt.Println(j) // 查看 j 的值
+	fmt.Println("===================struct===================!")
 	// struct
-	type Vertex struct {
-		X int
-		Y int
-	}
-	v := Vertex{1, 2}
-	v.X = 4
+	v := Vertex{1, 4}
+	v.X = 3
 	fmt.Println(v)
+	fmt.Println(v.Abs())
 	// 结构体指针
 	p2 := &v
 	p2.X = 1e9
@@ -143,7 +151,7 @@ func main() {
 	)
 
 	fmt.Println(v1, p3, v2, v3)
-
+	fmt.Println("===================数组===================!")
 	// 数组
 	var a [2]string
 	a[0] = "Hello"
@@ -154,6 +162,7 @@ func main() {
 	primes := [6]int{2, 3, 5, 7, 11, 13}
 	fmt.Println(primes)
 
+	fmt.Println("===================切片===================!")
 	// 切片
 	var s []int = primes[1:4]
 	fmt.Println(s)
@@ -174,6 +183,7 @@ func main() {
 	fmt.Println(a1, b1)
 	fmt.Println(names)
 
+	fmt.Println("===================闭包===================!")
 	// 闭包
 	pos, neg := adder(), adder()
 	for i := 0; i < 10; i++ {
