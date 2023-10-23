@@ -102,4 +102,24 @@ func main() {
 	p = &j         // 指向 j
 	*p = *p / 37   // 通过指针对 j 进行除法运算
 	fmt.Println(j) // 查看 j 的值
+	// struct
+	type Vertex struct {
+		X int
+		Y int
+	}
+	v := Vertex{1, 2}
+	v.X = 4
+	fmt.Println(v)
+	// 结构体指针
+	p2 := &v
+	p2.X = 1e9
+	fmt.Println(v)
+	var (
+		v1 = Vertex{1, 2}  // 创建一个 Vertex 类型的结构体
+		v2 = Vertex{X: 1}  // Y:0 被隐式地赋予
+		v3 = Vertex{}      // X:0 Y:0
+		p3 = &Vertex{1, 2} // 创建一个 *Vertex 类型的结构体（指针）
+	)
+
+	fmt.Println(v1, p3, v2, v3)
 }
