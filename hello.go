@@ -37,6 +37,27 @@ func pow(x, n, lim float64) float64 {
 	return lim
 }
 
+// 闭包
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+// 实现一个 fibonacci 函数，它返回一个函数（闭包），该闭包返回一个斐波纳契数列 `(0, 1, 1, 2, 3, 5, ...)`。
+func fibonacci() func() int {
+	f1 := 0
+	f2 := 1
+	return func() int {
+		f := f1
+		f1 = f2
+		f2 = f + f1
+		return f
+	}
+}
+
 func main() {
 	defer fmt.Println("world")
 	// loop
@@ -83,13 +104,13 @@ func main() {
 	}
 
 	// defer 栈 先进后出
-	fmt.Println("counting")
+	// fmt.Println("counting")
 
-	for i := 0; i < 10; i++ {
-		defer fmt.Println(i)
-	}
+	// for i := 0; i < 10; i++ {
+	// 	defer fmt.Println(i)
+	// }
 
-	fmt.Println("done")
+	// fmt.Println("done")
 	// 指针
 	i, j := 42, 2701
 
@@ -122,4 +143,47 @@ func main() {
 	)
 
 	fmt.Println(v1, p3, v2, v3)
+
+	// 数组
+	var a [2]string
+	a[0] = "Hello"
+	a[1] = "World"
+	fmt.Println(a[0], a[1])
+	fmt.Println(a)
+
+	primes := [6]int{2, 3, 5, 7, 11, 13}
+	fmt.Println(primes)
+
+	// 切片
+	var s []int = primes[1:4]
+	fmt.Println(s)
+
+	names := [4]string{
+		"John",
+		"Paul",
+		"George",
+		"Ringo",
+	}
+	fmt.Println(names)
+
+	a1 := names[0:2]
+	b1 := names[1:3]
+	fmt.Println(a1, b1)
+
+	b1[0] = "XXX"
+	fmt.Println(a1, b1)
+	fmt.Println(names)
+
+	// 闭包
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
